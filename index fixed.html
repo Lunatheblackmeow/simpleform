@@ -1,0 +1,165 @@
+<html>
+
+<head>
+	<style>
+		h1 {
+			color: #7157ff;
+		}
+
+		hr {
+			display: block;
+			border: 0;
+			border-top: 3px solid #f90;
+			padding: 0;
+		}
+
+		textarea {
+			width: 70%;
+		}
+
+		#div_main {
+			font-family: Sans-serif;
+			margin: auto;
+			margin-top: 30px;
+			width: 500px;
+		}
+
+		#div_left {
+			width: 150px;
+			display: inline-block;
+			float: left;
+		}
+
+		#div_left p {
+			margin-bottom: 19px;
+		}
+
+		#div_right {
+			width: 350px;
+			display: inline-block;
+			float: right;
+		}
+
+		.clear {
+			clear: both;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="div_main">
+		<h1>
+			Add Movie Title
+		</h1>
+		<hr>
+		<form name = 'form' action="process.html" method="POST">
+			<div id="div_left">
+				<p id="title">Title:</p>
+				<p id="type">Type:</p>
+				<p id="director">Director:</p>
+				<p id="r18">R18:</p>
+				<p id="boxoffice">Box Office ($):</p>
+			</div>
+			<div id="div_right">
+				<p><input type="text" id="txtTitle" name="txtTitle" value=""></p>
+				<p>
+					<select id="selectType">
+						<option> Select a Type</option>
+						<option value="horror">Horror</option>
+						<option value="comedy">Comedy</option>
+						<option value="action">Action</option>
+						<option value="sci-fi">Sci-Fi</option>
+					</select>
+				</p>
+				<p><input type="text" id="txtDirector" name="txtDirector" value=""></p>
+				<p><input type="radio" id="r18_Yes" name="r18"><label for="r18_Yes">Yes</label><input type="radio"
+						id="r18_No" name="r18"><label for="r18_No">No</label></p>
+				<p><input type="text" id="txtBoxOffice" name="txtBoxOffice" value=""></p>
+			</div>
+			<div class="clear"></div>
+			Description:
+			<br>
+			<textarea id="txtDescription" name="txtDescription" value=""></textarea>
+			<br>
+			<input type="submit" id="btnSubmit" onclick="return checkingform();">
+		</form>
+		<div id="divMessage">
+		</div>
+	</div>
+</body>
+<script language="javascript">
+
+	function checkingform() {
+		const title = document.getElementById("txtTitle");
+		const type = document.getElementById("selectType");
+		const director = document.getElementById("txtDirector");
+		const r18y = document.getElementById("r18_Yes");
+		const r18n = document.getElementById("r18_No");
+		const boxoffice = document.getElementById("txtBoxOffice");
+		const txtd = document.getElementById("txtDescription");
+		const msgbox = document.getElementById("divMessage");
+
+		msgbox.innerHTML = "" ;//declare that the msgbox.innerhtml is empty so that the div value is cleared before running the if/else statement
+
+		if (title.value == "") {
+			console.log("title empty");
+			event.preventDefault(); //prevent submit if text field is blank
+			title.style.backgroundColor = "Red"; //change background to red to highlight the empty input field
+			msgbox.innerHTML += "Title of Movie is Required.<br>"; //print the error message in the msgbox, the br is to do a break
+		}
+		else {
+			title.style.backgroundColor = "white";
+		}
+
+		if (type.selectedIndex == "") {
+			console.log('selection empty');
+			event.preventDefault(); //prevent submit if text field is blank
+			type.style.backgroundColor = "Red"; //change background to red to highlight the empty input field
+			msgbox.innerHTML += "Type of Movie is Required.<br>"; //print the error message in the msgbox
+		}
+		else {
+			type.style.backgroundColor = "white";
+		}
+
+		if (director.value == "") {
+			console.log('director empty');
+			event.preventDefault(); //prevent submit if text field is blank
+			director.style.backgroundColor = "Red"; //change background to red to highlight the empty input field
+			msgbox.innerHTML += "Director of Movie is Required.<br>"; //print the error message in the msgbox
+		}
+		else {
+			director.style.backgroundColor = "white";
+		}
+
+		if (r18y.checked == "" && r18n.checked == "") { //.check will check if the radio button is checked or not
+			event.preventDefault(); //prevent submit if text field is blank
+			console.log('radio empty');
+			msgbox.innerHTML += "Is the movie R18 rated?<br>"; //print the error message in the msgbox
+		}
+		else {
+			r18.style.backgroundColor = "white";
+		}
+
+		if (boxoffice.value == "") {
+			console.log('box office empty');
+			event.preventDefault(); //prevent submit if text field is blank
+			boxoffice.style.backgroundColor = "Red"; //change background to red to highlight the empty input field
+			msgbox.innerHTML += "Ticket Value is Missing.<br>"; //print the error message in the msgbox
+		}
+		else {
+			boxoffice.style.backgroundColor = "white";
+		}
+
+		if (txtd.value == "") {
+			console.log('description empty');
+			event.preventDefault(); //prevent submit if text field is blank
+			txtd.style.backgroundColor = "Red"; //change background to red to highlight the empty input field
+			msgbox.innerHTML += "Please enter an description of the movie.<br>"; //print the error message in the msgbox
+		}
+		else {
+			txtd.style.backgroundColor = "white";
+		}
+		}
+</script>
+
+</html>
